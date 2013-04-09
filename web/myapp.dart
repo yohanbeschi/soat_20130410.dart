@@ -10,14 +10,25 @@ void main() {
       ..addColumn('Email', new TextCell((Person o) => o.email))
       ..setData(persons);
   
+  final CheckboxInputElement multiContext = new CheckboxInputElement();
+  
   final TextInputElement search = new TextInputElement();
   search.onKeyUp.listen((e) {
-    final String value = search.value;
-    table.setData(persons.where((e) => e.firstname.toLowerCase().contains(value.toLowerCase()) 
-                                    || e.lastname.toLowerCase().contains(value.toLowerCase())).toList());
+    final String value = search.value.toLowerCase();
+    table.setData(persons.where((e) {
+      bool filter = e.firstname.toLowerCase().contains(value) 
+                                    || e.lastname.toLowerCase().contains(value);
+      if (multiContext.checked) {
+        return filter || e.age.toString().toLowerCase().contains(value) || e.email.toLowerCase().contains(value);
+      } else {
+        return filter;
+      }
+          
+    }).toList());
   });
   
   container.append(search);
+  container.append(multiContext);
   container.append(table.table);
 }
 
