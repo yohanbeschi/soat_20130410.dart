@@ -23,6 +23,6 @@ List<Person> get persons
       new Person('Leda', 'Doggslife', 50, 'leda.doggslife@fake.fr'),
       new Person('Dan', 'Druff', 38, 'dan.druff@fake.fr'),
       new Person('Al', 'Fresco', 36, 'al.fresco@fake.fr'),
-      new Person('Ido', 'Hoe', 25, 'ido.heo@fake.fr'),
-      new Person('Howie', 'Kisses', 15, 'howie.kisses@fake.fr'),
+      new Person('Ido', 'Hoe', 2, 'ido.heo@fake.fr'),
+      new Person('Howie', 'Kisses', 23, 'howie.kisses@fake.fr'),
       new Person('Len', 'Lease', 63, 'len.lease@fake.fr'),];
