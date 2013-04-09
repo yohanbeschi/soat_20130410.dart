@@ -1,0 +1,4 @@
+name: soat_20130410
+description: Demo for Soat
+dependencies:
+  browser: any
