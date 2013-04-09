@@ -10,6 +10,14 @@ void main() {
       ..addColumn('Email', new TextCell((Person o) => o.email))
       ..setData(persons);
   
+  final TextInputElement search = new TextInputElement();
+  search.onKeyUp.listen((e) {
+    final String value = search.value;
+    table.setData(persons.where((e) => e.firstname.toLowerCase().contains(value.toLowerCase()) 
+                                    || e.lastname.toLowerCase().contains(value.toLowerCase())).toList());
+  });
+  
+  container.append(search);
   container.append(table.table);
 }
 
