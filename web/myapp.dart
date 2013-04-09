@@ -1,35 +1,8 @@
 import '../lib/myapp_lib.dart';
 
 void main() {
-  final Element container = query('#container');
-  
-  final Table table = new Table<Person>(sorting:true)
-      ..addColumn('Firstname', new TextCell((Person o) => o.firstname))
-      ..addColumn('Lastname', new TextCell((Person o) => o.lastname))
-      ..addColumn('Age', new TextCell((Person o) => o.age))
-      ..addColumn('Email', new TextCell((Person o) => o.email))
-      ..setData(persons);
-  
-  final CheckboxInputElement multiContext = new CheckboxInputElement();
-  
-  final TextInputElement search = new TextInputElement();
-  search.onKeyUp.listen((e) {
-    final String value = search.value.toLowerCase();
-    table.setData(persons.where((e) {
-      bool filter = e.firstname.toLowerCase().contains(value) 
-                                    || e.lastname.toLowerCase().contains(value);
-      if (multiContext.checked) {
-        return filter || e.age.toString().toLowerCase().contains(value) || e.email.toLowerCase().contains(value);
-      } else {
-        return filter;
-      }
-          
-    }).toList());
-  });
-  
-  container.append(search);
-  container.append(multiContext);
-  container.append(table.table);
+  final UserListView view = new UserListView(persons);
+  view.addTo('#container');
 }
 
 List<Person> get persons 
