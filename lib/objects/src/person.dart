@@ -1,3 +1,5 @@
+part of objects;
+
 class Person {
   String firstname;
   String lastname;

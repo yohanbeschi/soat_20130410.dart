@@ -1,4 +1,4 @@
-import 'dart:html';
+part of widgets;
 
 typedef String CellContent<D>(D obj);
 
