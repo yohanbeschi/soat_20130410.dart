@@ -9,9 +9,14 @@ class UserListView {
         ..addColumn('Lastname', new TextCell((Person o) => o.lastname))
         ..addColumn('Age', new TextCell((Person o) => o.age))
         ..addColumn('Email', new TextCell((Person o) => o.email))
-        ..setData(persons);
+        ..setData(persons)
+        ..table.classes.add('listuser');
     
     final CheckboxInputElement multiContext = new CheckboxInputElement();
+    
+    final ButtonInputElement newUserButton = new ButtonInputElement()
+      ..value = 'New User'
+      ..onClick.listen((e) => window.location.hash = "#user:new");
     
     final TextInputElement search = new TextInputElement();
     search.onKeyUp.listen((e) {
@@ -31,6 +36,7 @@ class UserListView {
     container = new DivElement();
     container.append(search);
     container.append(multiContext);
+    container.append(newUserButton);
     container.append(table.table);
   }
   

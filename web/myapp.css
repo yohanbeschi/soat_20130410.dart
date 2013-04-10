@@ -1,12 +1,16 @@
-table {
+table.listuser  {
   border-collapse:collapse;
 }
 
-td, th {
+.listuser td, .listuser th {
   border: 1px solid #000;
   padding: 10px;
 }
 
-th {
+.listuser th {
   cursor:pointer;
+}
+
+.center {
+  text-align: center;
 }
