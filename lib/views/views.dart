@@ -1,6 +1,7 @@
 library views;
 
 import 'dart:html';
+import '../binding/binding.dart';
 import '../objects/objects.dart';
 import '../widgets/widgets.dart';
 

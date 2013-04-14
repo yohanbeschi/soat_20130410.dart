@@ -12,7 +12,7 @@ void main() {
 }
 
 void changePage(Event e) {
-  print('__${window.location.hash}');
+  //print('__${window.location.hash}');
   
   final Element container = query('#container');
   

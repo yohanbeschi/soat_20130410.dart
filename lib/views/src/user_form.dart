@@ -1,7 +1,9 @@
 part of views;
 
-class UserFormView {
-  FormElement container;
+class UserFormView extends FormView {
+  Element container;
+  Element form;
+  Tree errors;
   
   TextInputElement firstname;
   TextInputElement lastname;
@@ -13,12 +15,13 @@ class UserFormView {
   String action;
   
   UserFormView(List<Person> this.persons, String this.action) {
-    container = new FormElement();
+    container = new DivElement();
+    form = new FormElement();
     
-    firstname = new TextInputElement();
-    lastname = new TextInputElement();
-    age = new TextInputElement();
-    email = new TextInputElement();
+    firstname = buildInput('firstname', type:'text', binding:'true', validation:'requiredString'); //new TextInputElement();
+    lastname = buildInput('lastname', type:'text', binding:'true', validation:'requiredString'); //new TextInputElement();
+    age = buildInput('age', type:'text', binding:'true', validation:'requiredInt'); //new TextInputElement();
+    email = buildInput('email', type:'text', binding:'true', validation:'requiredEmail'); //new TextInputElement();
     button = new SubmitButtonInputElement();
     button.value = 'CreateUser';
     
@@ -38,7 +41,7 @@ class UserFormView {
     ..append(new TableRowElement()
                    ..append(new TableCellElement()
                              ..append(new SpanElement()
-                                        ..text = 'Age: '))
+                                        ..text = 'Age *: '))
                    ..append(new TableCellElement()
                              ..append(age)))
     ..append(new TableRowElement()
@@ -52,7 +55,12 @@ class UserFormView {
                               ..colSpan = 2
                               ..classes.add('center')      
                               ..append(button)));
-    container.append(table);
+    
+    form.append(table);
+    errors = new Tree([new TreeConfig((e) => e)]);
+    errors.addTo(container, 'afterBegin');
+    
+    container.append(form);
     
     bind();
   }
@@ -62,12 +70,20 @@ class UserFormView {
   }
   
   void createUser(Event e) {
-    print('submit');
-    var person = new Person(firstname.value, lastname.value, int.parse(age.value), email.value); 
-    persons.add(person);
-    window.location.hash = "#user:list";
-    
     e.preventDefault();
     e.stopPropagation();
+    
+    final ValidationResult results = this.validate();
+    
+    if (results.data != null) {
+      //var person = new Person(firstname.value, lastname.value, int.parse(age.value), email.value); 
+      persons.add(new Person.asDynaBean(results.data));
+      window.location.hash = "#user:list";
+    } else {
+      errors.setData(results.errors);
+    }
   }
+  
+  Element asWidget() => this.container;
+  Element getOrigin() => this.form;
 }
