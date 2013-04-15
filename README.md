@@ -2,7 +2,7 @@ Demo for So@t - 2013-04-10
 ==
 Introduction to Dart - Building complex Web Applications
 
-[Slides] http://fr.slideshare.net/yohanbeschi/introduction-to-dart
+[Slides]
 
 ## Project Organization
 
@@ -31,3 +31,5 @@ Introducing navigation based on HashTag + new View (form to create a new Person)
 
 ### 08_validation
 Adding a simple validation framework.
+
+  [Slides]: http://fr.slideshare.net/yohanbeschi/introduction-to-dart
